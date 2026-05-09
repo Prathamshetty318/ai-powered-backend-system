@@ -25,7 +25,7 @@ namespace UserApi.Services
 
         public User ValidateUser (string Name, string Password)
         {
-            return _context.Users.FirstOrDefault(u => u.Name == Name && u.password == Password);
+            return _context.Users.FirstOrDefault(u => u.Name == Name && u.Password == Password);
 
         }
     }

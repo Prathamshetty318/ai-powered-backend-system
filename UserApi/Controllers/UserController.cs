@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using UserApi.Services;
 using UserApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UserApi.Controllers
 {
-
+	[Authorize]
 	[ApiController]
 	[Route("api/[controller]")]
 	public class UserController : ControllerBase
@@ -16,6 +17,7 @@ namespace UserApi.Controllers
 			_service = service;
 		}
 
+		
 		[HttpGet]
 		public IActionResult GetAll()
 		{
@@ -30,6 +32,8 @@ namespace UserApi.Controllers
 			return Ok(user);
 		}
 
+
+		[AllowAnonymous]
 		[HttpPost]
 		public IActionResult Add(User user)
 		{
