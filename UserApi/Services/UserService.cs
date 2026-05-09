@@ -22,5 +22,11 @@ namespace UserApi.Services
             _context.Users.Add(user);
             _context.SaveChanges();
         }
+
+        public User ValidateUser (string Name, string Password)
+        {
+            return _context.Users.FirstOrDefault(u => u.Name == Name && u.password == Password);
+
+        }
     }
 }

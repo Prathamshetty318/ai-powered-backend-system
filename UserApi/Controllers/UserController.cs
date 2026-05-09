@@ -36,5 +36,9 @@ namespace UserApi.Controllers
 			_service.Add(user);
 			return Ok(user);
 		}
+
+		
+
+
 	}
 }
