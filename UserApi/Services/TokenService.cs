@@ -20,6 +20,8 @@ namespace UserApi.Services
 
         public string GenerateToken(User user)
         {
+            //throw new Exception("Test exception");
+
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, user.Name)
@@ -37,6 +39,7 @@ namespace UserApi.Services
                 expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds
                 );
+
 
             return new JwtSecurityTokenHandler().WriteToken(token);
 

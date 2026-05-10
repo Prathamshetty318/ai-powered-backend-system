@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using UserApi.Models;
+using Microsoft.AspNetCore.Diagnostics;
+using UserApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,7 +45,7 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
