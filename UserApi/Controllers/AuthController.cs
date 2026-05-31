@@ -21,9 +21,9 @@ namespace UserApi.Controllers
         }
 
         [HttpPost("Login")]
-        public IActionResult Login([FromBody] User user)
+        public async Task<IActionResult> Login([FromBody] User user)
         {
-            var validateUser = _service.ValidateUser(user.Name , user.Password);
+            var validateUser = await _service.ValidateUserAsync(user.Name , user.Password);
             if (validateUser == null) return Unauthorized();
 
             var token = _tservice.GenerateToken(validateUser);

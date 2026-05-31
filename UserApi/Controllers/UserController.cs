@@ -19,27 +19,28 @@ namespace UserApi.Controllers
 
 		
 		[HttpGet]
-		public IActionResult GetAll()
+		public async Task<IActionResult> GetAll()
 		{
-			return Ok(_service.GetAll());
+			var result = await _service.GetAllAsync();
+			return Ok(result);
 		}
 
 		[HttpGet("{id}")]
-		public IActionResult GetById(int id)
+		public async Task<IActionResult> GetById(int id)
 		{
-			var user = _service.GetById(id);
+			var user = await _service.GetByIdAsync(id);
 			if (user == null) return NotFound();
 			return Ok(user);
-		}
+        }
 
 
 		[AllowAnonymous]
 		[HttpPost]
-		public IActionResult Add(User user)
+		public async Task<IActionResult> Add(User user)
 		{
-			_service.Add(user);
-			return Ok(user);
-		}
+			await _service.AddAsync (user);
+			return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
+        }
 
 		
 

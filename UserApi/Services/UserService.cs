@@ -1,5 +1,7 @@
 using UserApi.Models;
 using UserApi.Data;
+using system.linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace UserApi.Services
 {
@@ -13,19 +15,25 @@ namespace UserApi.Services
             _context = context;
         }
 
-        public List<User> GetAll() => _context.Users.ToList();
-
-        public User GetById(int id) => _context.Users.FirstOrDefault(u => u.Id == id);
-
-        public void Add(User user)  
+        public async Task<List<User>> GetAllAsync()
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            return await _context.Users.ToListAsync();
         }
 
-        public User ValidateUser (string Name, string Password)
+        public async Task<User> GetByIdAsync (int id)
         {
-            return _context.Users.FirstOrDefault(u => u.Name == Name && u.Password == Password);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
+
+        public async Task AddAsync (User user)  
+        {
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task <User> ValidateUserAsync (string Name, string Password)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Name == Name && u.Password == Password);
 
         }
     }
