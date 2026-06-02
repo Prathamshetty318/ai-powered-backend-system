@@ -9,6 +9,7 @@ using System.Text;
 using UserApi.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using UserApi.Middleware;
+using UserApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +39,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddControllers();
