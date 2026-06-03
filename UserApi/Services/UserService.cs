@@ -1,39 +1,43 @@
 using UserApi.Models;
 using UserApi.Data;
-using system.linq;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using UserApi.Interfaces;
+using UserApi.Repositories;
+
 
 namespace UserApi.Services
 {
 
     public class UserService
     {
-        private readonly AppDbContext _context;
+        private readonly IGenericRepository<User> _repository;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(AppDbContext context)
+        public UserService(IGenericRepository<User> repository , IUserRepository userRepository)
         {
-            _context = context;
+            _repository = repository;
+            _userRepository = userRepository;
         }
 
         public async Task<List<User>> GetAllAsync()
         {
-            return await _context.Users.ToListAsync();
+            return (await _repository.GetAllAsync()).ToList();
         }
 
         public async Task<User> GetByIdAsync (int id)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return await _repository.GetByIdAsync(id);
         }
 
         public async Task AddAsync (User user)  
         {
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
+            await _repository.AddAsync(user);
         }
 
         public async Task <User> ValidateUserAsync (string Name, string Password)
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Name == Name && u.Password == Password);
+            return await _userRepository.ValidateUserAsync(Name, Password);
 
         }
     }

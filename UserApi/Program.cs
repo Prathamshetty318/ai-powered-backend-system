@@ -10,6 +10,7 @@ using UserApi.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using UserApi.Middleware;
 using UserApi.Repositories;
+using UserApi.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped(typeof (IGenericRepository<>), 
+    typeof (GenericRepository<>));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddControllers();

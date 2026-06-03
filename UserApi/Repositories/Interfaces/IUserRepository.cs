@@ -2,17 +2,12 @@ using UserApi.Models;
 using UserApi.Services;
 
 
-namespace UserApi.Reposotories
+namespace UserApi.Interfaces
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetAllAsync();
 
-        Task<User> GetByIdAsync();
-
-        Task AddAsync(User user);
-
-        Task<User> ValidateUser(
+        Task<User> ValidateUserAsync(
             string name,
             string password);
     }

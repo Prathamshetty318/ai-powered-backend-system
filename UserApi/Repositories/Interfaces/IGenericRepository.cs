@@ -1,9 +1,9 @@
 using UserApi.Models;
 using UserApi.Services;
 using UserApi.Repositories;
-using System.Collections.Generic
+using System.Collections.Generic;
 
-namespace UserApi.Repositories
+namespace UserApi.Interfaces
 {
     public interface IGenericRepository<T>
         where T : class

@@ -1,9 +1,9 @@
 using UserApi.Models;
 using UserApi.Data;
-using system.linq;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using UserApi.Services;
-using UserApi.Repositories;
+using UserApi.Interfaces;
 
 namespace UserApi.Repositories
 {
@@ -16,25 +16,11 @@ namespace UserApi.Repositories
             _context = context;
         }
 
-        public async Task<List<User> GetAllAsync()
+        public async Task<User> ValidateUserAsync(string Name , string Password)
         {
-            return await _context.Users.ToListAsync();
-        }
-
-        public async Task(User) GetByIdAsync(int id)
-        {
-            return await _context.Users.FirstOrDefaultAsync(uint => u.Id == id);
-        }
-
-        public async Task AddAsync(User user)
-        {
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<User> ValidateUserAsync(string Name, string Password)
-        {
-            return await _context.Users.FirstOrDefaultAsync(u => u.Name == Name && u.Password == Password);
+            return await _context.Users
+                .FirstOrDefaultAsync
+                (u => u.Name == Name && u.Password == Password);
 
         }
     }
