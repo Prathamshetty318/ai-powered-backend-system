@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using UserApi.Services;
 using UserApi.Interfaces;
+using UserApi.DTOs;
 
 namespace UserApi.Repositories
 {

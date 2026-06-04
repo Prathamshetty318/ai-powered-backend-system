@@ -1,0 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using UserApi.Models;
+
+namespace UserApi.DTOs
+{
+    public class UserResponseDto
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+    }
+}

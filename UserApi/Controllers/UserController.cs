@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using UserApi.Services;
 using UserApi.Models;
 using Microsoft.AspNetCore.Authorization;
+using UserApi.DTOs;
 
 namespace UserApi.Controllers
 {
@@ -36,10 +37,11 @@ namespace UserApi.Controllers
 
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<IActionResult> Add(User user)
+		public async Task<IActionResult> Add(CreateUserDto user)
 		{
+			
 			await _service.AddAsync (user);
-			return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
+			return Ok(user);
         }
 
 		
