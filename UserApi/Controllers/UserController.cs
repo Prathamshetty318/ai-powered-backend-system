@@ -3,9 +3,11 @@ using UserApi.Services;
 using UserApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using UserApi.DTOs;
+using System.ComponentModel.DataAnnotations;
 
 namespace UserApi.Controllers
 {
+	
 	[Authorize]
 	[ApiController]
 	[Route("api/[controller]")]
@@ -37,11 +39,11 @@ namespace UserApi.Controllers
 
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<IActionResult> Add(CreateUserDto user)
+		public async Task<IActionResult> Add(CreateUserDto User)
 		{
-			
-			await _service.AddAsync (user);
-			return Ok(user);
+
+            await _service.AddAsync (User);
+			return Ok(User);
         }
 
 		

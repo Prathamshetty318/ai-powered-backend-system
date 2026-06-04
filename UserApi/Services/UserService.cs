@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using UserApi.Interfaces;
 using UserApi.Repositories;
 using UserApi.DTOs;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 
 namespace UserApi.Services
