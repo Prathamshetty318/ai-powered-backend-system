@@ -11,6 +11,11 @@ using Microsoft.AspNetCore.Diagnostics;
 using UserApi.Middleware;
 using UserApi.Repositories;
 using UserApi.Interfaces;
+using UserApi.Validators;
+using UserApi.DTOs;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,16 +42,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 
-
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddControllers();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>(); builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped(typeof (IGenericRepository<>), 
-    typeof (GenericRepository<>));
+    typeof (GenericRepository<>));  
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<UserService>();
-builder.Services.AddControllers();
-
 
 var app = builder.Build();
 

@@ -4,6 +4,8 @@ using UserApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using UserApi.DTOs;
 using System.ComponentModel.DataAnnotations;
+using FluentValidation;
+using UserApi.Validators;
 
 namespace UserApi.Controllers
 {
@@ -41,6 +43,14 @@ namespace UserApi.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Add(CreateUserDto User)
 		{
+
+            Console.WriteLine("Controller Hit");
+
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             await _service.AddAsync (User);
 			return Ok(User);
