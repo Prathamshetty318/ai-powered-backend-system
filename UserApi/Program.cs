@@ -45,6 +45,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddControllers();
+builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>(); builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped(typeof (IGenericRepository<>), 
     typeof (GenericRepository<>));  
