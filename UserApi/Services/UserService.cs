@@ -6,6 +6,8 @@ using UserApi.Interfaces;
 using UserApi.Repositories;
 using UserApi.DTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
+using AutoMapper;
+using UserApi.Mappings;
 
 
 namespace UserApi.Services
@@ -15,22 +17,21 @@ namespace UserApi.Services
     {
         private readonly IGenericRepository<User> _repository;
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UserService(IGenericRepository<User> repository , IUserRepository userRepository)
+        public UserService(IGenericRepository<User> repository , IUserRepository userRepository, IMapper mapper)
         {
             _repository = repository;
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         public async Task<List<UserResponseDto>> GetAllAsync()
         {
             var users = await _repository.GetAllAsync();
 
-            return users.Select(u => new UserResponseDto
-            {
-                Id = u.Id,
-                Name = u.Name
-            }).ToList();
+            return _mapper.Map<List<UserResponseDto>>(users);
+
         }
 
         public async Task<UserResponseDto> GetByIdAsync (int id)
@@ -42,20 +43,13 @@ namespace UserApi.Services
                 return null;
             }
 
-            return new UserResponseDto
-            {
-                Id = user.Id,
-                Name = user.Name
-            };
+            return _mapper.Map<UserResponseDto>(user);
+
         }
 
         public async Task AddAsync (CreateUserDto dto)  
         {
-            var User = new User
-            {
-                Name = dto.Name,
-                Password = dto.Password
-            };
+            var User = _mapper.Map<User>(dto);
             await _repository.AddAsync(User);
         }
 
