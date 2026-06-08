@@ -18,12 +18,14 @@ namespace UserApi.Services
         private readonly IGenericRepository<User> _repository;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        public readonly IUserDapperRepository _dapperRepository;
 
-        public UserService(IGenericRepository<User> repository , IUserRepository userRepository, IMapper mapper)
+        public UserService(IGenericRepository<User> repository , IUserRepository userRepository, IMapper mapper, IUserDapperRepository dapperRepository)
         {
             _repository = repository;
             _userRepository = userRepository;
             _mapper = mapper;
+            _dapperRepository = dapperRepository;
         }
 
         public async Task<List<UserResponseDto>> GetAllAsync()
@@ -57,6 +59,11 @@ namespace UserApi.Services
         {
             return await _userRepository.ValidateUserAsync(Name, Password);
 
+        }
+
+        public async Task<IEnumerable<UserResponseDto>> GetUsersDapperAsync()
+        {
+            return await _dapperRepository.GetAllUserAsync();
         }
     }
 }

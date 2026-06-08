@@ -16,6 +16,7 @@ using UserApi.DTOs;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using UserApi.Mappings;
+using UserApi.DapperRepositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,7 +43,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-
+builder.Services.AddScoped<IUserDapperRepository, UserDapperRepository>();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(UserProfile));

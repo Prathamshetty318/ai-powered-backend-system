@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using UserApi.DTOs;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation;
+using UserApi.Interfaces;
 using UserApi.Validators;
 
 namespace UserApi.Controllers
@@ -16,19 +17,21 @@ namespace UserApi.Controllers
 	public class UserController : ControllerBase
 	{
 		private readonly UserService _service;
+        private readonly IUserDapperRepository _dapperRepository;
 
-		public UserController(UserService service)
+        public UserController(UserService service, IUserDapperRepository dapperRepository)
 		{
 			_service = service;
-		}
+			_dapperRepository = dapperRepository;
+        }
 
 		
-		[HttpGet]
+		/*[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
 			var result = await _service.GetAllAsync();
 			return Ok(result);
-		}
+		}*/
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetById(int id)
@@ -56,8 +59,17 @@ namespace UserApi.Controllers
 			return Ok(User);
         }
 
-		
+        [HttpGet("dapper-users")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var result =
+                await _service.GetUsersDapperAsync();
+
+            return Ok(result);
+        }
 
 
-	}
+
+
+    }
 }
