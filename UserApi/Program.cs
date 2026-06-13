@@ -17,7 +17,13 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using UserApi.Mappings;
 using UserApi.DapperRepositories;
+using Serilog;
 
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +59,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped(typeof (IGenericRepository<>),  typeof (GenericRepository<>));  
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<UserService>();
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 

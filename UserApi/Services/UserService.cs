@@ -18,14 +18,16 @@ namespace UserApi.Services
         private readonly IGenericRepository<User> _repository;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public readonly IUserDapperRepository _dapperRepository;
+        private readonly IUserDapperRepository _dapperRepository;
+        private readonly ILogger<UserService> _logger;
 
-        public UserService(IGenericRepository<User> repository , IUserRepository userRepository, IMapper mapper, IUserDapperRepository dapperRepository)
+        public UserService(IGenericRepository<User> repository , IUserRepository userRepository, IMapper mapper, IUserDapperRepository dapperRepository, ILogger<UserService> logger)
         {
             _repository = repository;
             _userRepository = userRepository;
             _mapper = mapper;
             _dapperRepository = dapperRepository;
+            _logger = logger;
         }
 
         public async Task<List<UserResponseDto>> GetAllAsync()
