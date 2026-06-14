@@ -3,7 +3,7 @@ Learning backend architecture
 done with Concepts Like :
 
 Middleware ,
-Exception handling , 
+Global Exception handling , 
 Entity ,
 Controller ,
 Linq ,
@@ -17,5 +17,12 @@ DTOs ,
 Repositories ,
 Entity Framework DB context ,
 Generic Repositories ,
-Validations
+Validations,
+Fluent Validation,
+AutoMapper,
+Dapper
+
+------
+
+Serilog / Logging,
 
