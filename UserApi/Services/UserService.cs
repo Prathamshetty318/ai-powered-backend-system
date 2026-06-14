@@ -32,6 +32,7 @@ namespace UserApi.Services
 
         public async Task<List<UserResponseDto>> GetAllAsync()
         {
+            _logger.LogInformation("Fetching all Users");
             var users = await _repository.GetAllAsync();
 
             return _mapper.Map<List<UserResponseDto>>(users);
@@ -59,12 +60,15 @@ namespace UserApi.Services
 
         public async Task <User> ValidateUserAsync (string Name, string Password)
         {
+            _logger.LogInformation("User {User} Logged in", Name);
+            _logger.LogWarning("User {User} attempted to log in with incorrect password", Name);
             return await _userRepository.ValidateUserAsync(Name, Password);
 
         }
 
         public async Task<IEnumerable<UserResponseDto>> GetUsersDapperAsync()
         {
+            _logger.LogInformation("Fetching all Users");
             return await _dapperRepository.GetAllUserAsync();
         }
     }
