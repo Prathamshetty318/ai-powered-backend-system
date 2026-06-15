@@ -8,7 +8,7 @@ using UserApi.DTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
 using AutoMapper;
 using UserApi.Mappings;
-
+using Microsoft.Extensions.Caching.Memory;
 
 namespace UserApi.Services
 {
@@ -20,14 +20,21 @@ namespace UserApi.Services
         private readonly IMapper _mapper;
         private readonly IUserDapperRepository _dapperRepository;
         private readonly ILogger<UserService> _logger;
+        private readonly IMemoryCache _cache;
 
-        public UserService(IGenericRepository<User> repository , IUserRepository userRepository, IMapper mapper, IUserDapperRepository dapperRepository, ILogger<UserService> logger)
+        public UserService(IGenericRepository<User> repository , 
+            IUserRepository userRepository, 
+            IMapper mapper, 
+            IUserDapperRepository dapperRepository, 
+            ILogger<UserService> logger,
+            IMemoryCache cache)
         {
             _repository = repository;
             _userRepository = userRepository;
             _mapper = mapper;
             _dapperRepository = dapperRepository;
             _logger = logger;
+            _cache = cache;
         }
 
         public async Task<List<UserResponseDto>> GetAllAsync()
@@ -68,8 +75,23 @@ namespace UserApi.Services
 
         public async Task<IEnumerable<UserResponseDto>> GetUsersDapperAsync()
         {
+
+            if (_cache.TryGetValue("all_users", out IEnumerable<UserResponseDto> user))
+            {
+                _logger.LogInformation("Users returned from cache");
+
+                return user;
+            }
+
+
             _logger.LogInformation("Fetching all Users");
-            return await _dapperRepository.GetAllUserAsync();
+
+            var users = await _dapperRepository.GetAllUserAsync();
+
+            _cache.Set("all_users", users, TimeSpan.FromMinutes(5));
+            _logger.LogInformation("Users returned from database and cached");
+
+            return users;
         }
     }
 }

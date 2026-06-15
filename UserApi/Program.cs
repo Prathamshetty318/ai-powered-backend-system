@@ -60,6 +60,7 @@ builder.Services.AddScoped(typeof (IGenericRepository<>),  typeof (GenericReposi
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<UserService>();
 builder.Host.UseSerilog();
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
