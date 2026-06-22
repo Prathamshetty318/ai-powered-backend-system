@@ -1,6 +1,8 @@
 using System;
 using UserApi.Interfaces;
 using UserApi.Repositories;
+using UserApi.Data;
+using UserApi.Models;
 
 namespace UserApi.Interfaces
 {

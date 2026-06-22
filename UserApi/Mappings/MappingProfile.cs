@@ -5,9 +5,9 @@ using UserApi.Models;
 
 namespace UserApi.Mappings
 {
-    public class UserProfile : Profile
+    public class MappingProfile : Profile
     {
-       public UserProfile()
+       public MappingProfile()
         {
             CreateMap<CreateUserDto, User>();
             CreateMap<User, UserResponseDto>();
