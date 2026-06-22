@@ -1,3 +1,6 @@
+using System;
+using UserApi.Models;
+
 namespace UserApi.Models
 {
 
@@ -8,6 +11,9 @@ namespace UserApi.Models
         public string Name { get; set; }
 
         public string Password { get; set; }
+
+        public UserProfile Profile { get; set; }
+
 
     }
 }
