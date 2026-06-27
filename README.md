@@ -1,7 +1,7 @@
 Learning backend architecture
 
 done with Concepts Like :
-OOP (enough for backend)
+OOP
   Async/Await
   LINQ
   Dependency Injection
