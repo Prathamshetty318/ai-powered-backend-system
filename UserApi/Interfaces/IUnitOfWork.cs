@@ -9,6 +9,11 @@ namespace UserApi.Interfaces
     public interface IUnitofWork
     {
         IGenericRepository<User> users { get; }
+
+        IGenericRepository<UserProfile> userProfiles { get; }
+
+        IGenericRepository<AuditLog> AuditLog { get; }
+
         Task<int> SaveChangesAsync();
     }
 }

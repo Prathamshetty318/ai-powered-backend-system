@@ -34,14 +34,12 @@ namespace UserApi.Repositories
 
         public async Task AddAsync(T entity)
 		{
-			await _dbset.AddAsync(entity);
-			await _context.SaveChangesAsync();
+			_dbset.AddAsync(entity);
 		}
 
 		public async Task UpdateAsync(T entity)
 		{
 			_dbset.Update(entity);
-			await _context.SaveChangesAsync();
 		}
 
 		public async Task DeleteAsync(int id)
@@ -51,7 +49,6 @@ namespace UserApi.Repositories
 			if (entity != null)
 			{
 				_dbset.Remove(entity);
-				await _context.SaveChangesAsync();
 			}
 
 		}

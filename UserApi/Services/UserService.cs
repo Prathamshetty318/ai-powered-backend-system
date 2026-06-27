@@ -15,6 +15,7 @@ namespace UserApi.Services
 
     public class UserService
     {
+        private readonly IUnitofWork unitofWork;
         private readonly IGenericRepository<User> _repository;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -27,7 +28,8 @@ namespace UserApi.Services
             IMapper mapper, 
             IUserDapperRepository dapperRepository, 
             ILogger<UserService> logger,
-            IMemoryCache cache)
+            IMemoryCache cache,
+            IUnitofWork unitofWork)
         {
             _repository = repository;
             _userRepository = userRepository;
@@ -35,6 +37,7 @@ namespace UserApi.Services
             _dapperRepository = dapperRepository;
             _logger = logger;
             _cache = cache;
+            _unitofwork = unitofWork;
         }
 
         public async Task<List<UserResponseDto>> GetAllAsync()
@@ -75,7 +78,7 @@ namespace UserApi.Services
         public async Task AddAsync (CreateUserDto dto)  
         {
             var User = _mapper.Map<User>(dto);
-            await _repository.AddAsync(User);
+            await _unitofwork.Users.AddAsync(User);
         }
 
         public async Task <User> ValidateUserAsync (string Name, string Password)
