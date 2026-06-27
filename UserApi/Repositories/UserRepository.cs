@@ -23,5 +23,10 @@ namespace UserApi.Repositories
                 (u => u.Name == Name && u.Password == Password);
 
         }
+
+        public async Task<User> GetByNameAsync(string name)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Name == name);
+        }
     }
 }

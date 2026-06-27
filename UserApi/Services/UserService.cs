@@ -59,6 +59,19 @@ namespace UserApi.Services
 
         }
 
+        public async Task<UserResponseDto> GetByNameAsync(string name)
+        {
+            var user = await _userRepository.GetByNameAsync(name);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return _mapper.Map<UserResponseDto>(user);
+
+        }
+
         public async Task AddAsync (CreateUserDto dto)  
         {
             var User = _mapper.Map<User>(dto);

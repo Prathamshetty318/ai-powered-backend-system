@@ -32,7 +32,7 @@ namespace UserApi.Repositories
 			return await _dbset.FindAsync(id);
 		}
 
-		public async Task AddAsync(T entity)
+        public async Task AddAsync(T entity)
 		{
 			await _dbset.AddAsync(entity);
 			await _context.SaveChangesAsync();

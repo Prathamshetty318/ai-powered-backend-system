@@ -10,5 +10,7 @@ namespace UserApi.Interfaces
         Task<User> ValidateUserAsync(
             string name,
             string password);
+
+        Task<User> GetByNameAsync(string name);
     }
 }   

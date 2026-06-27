@@ -12,5 +12,25 @@ namespace UserApi.Data
         public DbSet<AuditLog> AuditLogs { get; set; }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Name)
+                .IsUnique();
+
+            modelBuilder.Entity<UserProfile>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<UserProfile>()
+               .HasIndex(u => u.PhoneNumber)
+               .IsUnique();
+
+        }
     }
+
+    
 }

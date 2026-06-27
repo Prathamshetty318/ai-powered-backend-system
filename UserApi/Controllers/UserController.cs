@@ -55,6 +55,13 @@ namespace UserApi.Controllers
                 return BadRequest(ModelState);
             }
 
+			var existingUser = await _service.GetByNameAsync(User.Name);
+
+			if (existingUser != null)
+			{
+				return BadRequest("User with the same name already exists.");
+            }
+
             await _service.AddAsync (User);
 			return Ok(User);
         }
