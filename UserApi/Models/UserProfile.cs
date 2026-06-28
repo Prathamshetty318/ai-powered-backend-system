@@ -14,7 +14,7 @@ namespace UserApi.Models
 
         public string PhoneNumber { get; set; }
 
-        public User User { get; set; }
+        public User? User { get; set; }
 
     }
 }

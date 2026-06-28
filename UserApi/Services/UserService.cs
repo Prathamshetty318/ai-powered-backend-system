@@ -15,35 +15,32 @@ namespace UserApi.Services
 
     public class UserService
     {
-        private readonly IUnitofWork unitofWork;
-        private readonly IGenericRepository<User> _repository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IUserDapperRepository _dapperRepository;
         private readonly ILogger<UserService> _logger;
         private readonly IMemoryCache _cache;
 
-        public UserService(IGenericRepository<User> repository , 
-            IUserRepository userRepository, 
+        public UserService(IUserRepository userRepository, 
             IMapper mapper, 
             IUserDapperRepository dapperRepository, 
             ILogger<UserService> logger,
             IMemoryCache cache,
-            IUnitofWork unitofWork)
+            IUnitOfWork unitOfWork)
         {
-            _repository = repository;
             _userRepository = userRepository;
             _mapper = mapper;
             _dapperRepository = dapperRepository;
             _logger = logger;
             _cache = cache;
-            _unitofwork = unitofWork;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<List<UserResponseDto>> GetAllAsync()
         {
             _logger.LogInformation("Fetching all Users");
-            var users = await _repository.GetAllAsync();
+            var users = await _unitOfWork.Users.GetAllAsync();
 
             return _mapper.Map<List<UserResponseDto>>(users);
 
@@ -51,7 +48,7 @@ namespace UserApi.Services
 
         public async Task<UserResponseDto> GetByIdAsync (int id)
         {
-            var user = await _repository.GetByIdAsync(id);
+            var user = await _unitOfWork.Users.GetByIdAsync(id);
 
             if (user == null)
             {
@@ -78,7 +75,7 @@ namespace UserApi.Services
         public async Task AddAsync (CreateUserDto dto)  
         {
             var User = _mapper.Map<User>(dto);
-            await _unitofwork.Users.AddAsync(User);
+            await _unitOfWork.Users.AddAsync(User);
         }
 
         public async Task <User> ValidateUserAsync (string Name, string Password)

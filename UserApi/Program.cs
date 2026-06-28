@@ -61,6 +61,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<UserService>();
 builder.Host.UseSerilog();
 builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
 var app = builder.Build();
 

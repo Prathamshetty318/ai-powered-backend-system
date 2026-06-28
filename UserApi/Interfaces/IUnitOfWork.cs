@@ -6,9 +6,9 @@ using UserApi.Models;
 
 namespace UserApi.Interfaces
 {
-    public interface IUnitofWork
+    public interface IUnitOfWork
     {
-        IGenericRepository<User> users { get; }
+        IGenericRepository<User> Users { get; }
 
         IGenericRepository<UserProfile> userProfiles { get; }
 

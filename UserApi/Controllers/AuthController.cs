@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using UserApi.Services;
 using UserApi.Models;
+using UserApi.DTOs;
 
 
 namespace UserApi.Controllers
@@ -21,9 +22,9 @@ namespace UserApi.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] User user)
+        public async Task<IActionResult> Login(LoginDto dto)
         {
-            var validateUser = await _service.ValidateUserAsync(user.Name , user.Password);
+            var validateUser = await _service.ValidateUserAsync(dto.Name , dto.Password);
             if (validateUser == null) return Unauthorized();
 
             var token = _tservice.GenerateToken(validateUser);
