@@ -1,29 +1,40 @@
 Learning backend architecture
 
 done with Concepts Like :
+OOP
+  Async/Await
+  LINQ
+  Dependency Injection
+  Middleware
+  Exception Handling
 
-Middleware ,
-Global Exception handling , 
-Entity ,
-Controller ,
-Linq ,
-Data Migration ,
-Services ,
-JWT Authentication ,
-Interfaces ,
-dependency Injections ,
-Async Await ,
-DTOs ,
-Repositories ,
-Entity Framework DB context ,
-Generic Repositories ,
-Validations,
-Fluent Validation,
-AutoMapper,
-Dapper
-
-------
-
-Serilog / Logging,
-Caching,
-Unit of Work
+ASP.NET Core
+  Controllers
+  Routing
+  Model Binding
+  JWT Authentication
+  Authorization
+  REST APIs
+  
+Database
+  SQL
+  Entity Framework Core
+  DbContext
+  Migrations
+  Fluent API
+  Unique Constraints
+  
+Backend Architecture
+  Layered Architecture
+  Repository Pattern
+  Generic Repository
+  DTO Pattern
+  AutoMapper
+  Validation
+  Dapper
+  Stored Procedures
+  
+Production Concepts
+  Logging (Serilog)
+  In-Memory Caching
+  Global Exception Middleware
