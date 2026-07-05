@@ -41,10 +41,18 @@ namespace UserApi.Controllers
 			return Ok(user);
         }
 
+        [HttpGet("dapper-users")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var result =
+                await _service.GetUsersDapperAsync();
 
-		[AllowAnonymous]
-		[HttpPost]
-		public async Task<IActionResult> Add(CreateUserDto User)
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+		[HttpPost("register")]
+		public async Task<IActionResult> RegisterUser(RegisterUserDto dto)
 		{
 
             Console.WriteLine("Controller Hit");
@@ -55,25 +63,18 @@ namespace UserApi.Controllers
                 return BadRequest(ModelState);
             }
 
-			var existingUser = await _service.GetByNameAsync(User.Name);
+			var existingUser = await _service.GetByNameAsync(dto.Name);
 
 			if (existingUser != null)
 			{
 				return BadRequest("User with the same name already exists.");
             }
 
-            await _service.AddAsync (User);
-			return Ok(User);
+            await _service.RegisterUserAsync (dto);
+			return Ok("User Registered Successfully!!!!");
         }
 
-        [HttpGet("dapper-users")]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            var result =
-                await _service.GetUsersDapperAsync();
-
-            return Ok(result);
-        }
+       
 
 
 

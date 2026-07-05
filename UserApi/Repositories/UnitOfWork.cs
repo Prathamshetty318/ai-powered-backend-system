@@ -12,9 +12,9 @@ namespace UserApi.Repositories
 
         public IGenericRepository<User> Users { get; }
 
-        public IGenericRepository<UserProfile> userProfiles { get; }
+        public IGenericRepository<UserProfile> UserProfiles { get; }
 
-        public IGenericRepository<AuditLog> AuditLog { get; }
+        public IGenericRepository<AuditLog> AuditLogs { get; }
 
         public UnitOfWork(AppDbContext context)
         {
@@ -22,9 +22,9 @@ namespace UserApi.Repositories
 
             Users = new GenericRepository<User>(_context);
 
-            userProfiles = new GenericRepository<UserProfile>(_context);
+            UserProfiles = new GenericRepository<UserProfile>(_context);
 
-            AuditLog = new GenericRepository<AuditLog>(_context);
+            AuditLogs = new GenericRepository<AuditLog>(_context);
 
         }
 

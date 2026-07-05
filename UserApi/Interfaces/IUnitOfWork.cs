@@ -10,9 +10,9 @@ namespace UserApi.Interfaces
     {
         IGenericRepository<User> Users { get; }
 
-        IGenericRepository<UserProfile> userProfiles { get; }
+        IGenericRepository<UserProfile> UserProfiles { get; }
 
-        IGenericRepository<AuditLog> AuditLog { get; }
+        IGenericRepository<AuditLog> AuditLogs { get; }
 
         Task<int> SaveChangesAsync();
     }

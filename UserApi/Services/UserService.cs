@@ -72,20 +72,6 @@ namespace UserApi.Services
 
         }
 
-        public async Task AddAsync (CreateUserDto dto)  
-        {
-            var User = _mapper.Map<User>(dto);
-            await _unitOfWork.Users.AddAsync(User);
-        }
-
-        public async Task <User> ValidateUserAsync (string Name, string Password)
-        {
-            _logger.LogInformation("User {User} Logged in", Name);
-            _logger.LogWarning("User {User} attempted to log in with incorrect password", Name);
-            return await _userRepository.ValidateUserAsync(Name, Password);
-
-        }
-
         public async Task<IEnumerable<UserResponseDto>> GetUsersDapperAsync()
         {
 
@@ -106,5 +92,28 @@ namespace UserApi.Services
 
             return users;
         }
+
+        public async Task RegisterUserAsync (RegisterUserDto dto)  
+        {
+            var User = _mapper.Map<User>(dto);
+            await _unitOfWork.Users.AddAsync(User);
+
+            await _unitOfWork.AuditLogs.AddAsync(
+                new AuditLog
+                {
+                    Action = $"User {User.Name} registered",
+                });
+
+            await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task <User> ValidateUserAsync (string Name, string Password)
+        {
+            _logger.LogInformation("User {User} Logged in", Name);
+            _logger.LogWarning("User {User} attempted to log in with incorrect password", Name);
+            return await _userRepository.ValidateUserAsync(Name, Password);
+
+        }
+
     }
 }

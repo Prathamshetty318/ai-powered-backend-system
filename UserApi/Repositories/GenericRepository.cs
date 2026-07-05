@@ -34,7 +34,7 @@ namespace UserApi.Repositories
 
         public async Task AddAsync(T entity)
 		{
-			_dbset.AddAsync(entity);
+			await _dbset.AddAsync(entity);
 		}
 
 		public async Task UpdateAsync(T entity)

@@ -12,7 +12,7 @@ namespace UserApi.Models
 
         public string Password { get; set; }
 
-        public UserProfile? Profile { get; set; }
+        public UserProfile? UserProfile { get; set; }
 
 
     }
