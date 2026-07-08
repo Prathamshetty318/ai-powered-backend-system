@@ -1,11 +1,10 @@
-using UserApi.Entities;
-using UserApi.Data;
+using UserApi.Domain.Entities;
+using UserApi.Infrastructure.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using UserApi.Services;
-using UserApi.Interfaces;
+using UserApi.Domain.Interfaces;
 
-namespace UserApi.Repositories
+namespace UserApi.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {

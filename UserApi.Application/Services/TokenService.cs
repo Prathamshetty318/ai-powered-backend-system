@@ -3,11 +3,11 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using UserApi.Entities;
+using UserApi.Domain.Entities;
 using Microsoft.Extensions.Options;
 
 
-namespace UserApi.Services
+namespace UserApi.Application.Services
 {
     public class TokenService
     {

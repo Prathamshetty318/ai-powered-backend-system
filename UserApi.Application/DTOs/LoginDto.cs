@@ -1,7 +1,6 @@
-using Microsoft.EntityFrameworkCore;
-using UserApi.Entities;
+using UserApi.Domain.Entities;
 
-namespace UserApi.DTOs
+namespace UserApi.Application.DTOs
 {
     public class LoginDto
     {

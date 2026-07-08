@@ -1,6 +1,4 @@
 using UserApi.Domain.Entities;
-using UserApi.Services;
-using UserApi.Repositories;
 using System.Collections.Generic;
 
 namespace UserApi.Domain.Interfaces

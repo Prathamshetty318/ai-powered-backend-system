@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using UserApi.Entities;
+using UserApi.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using UserApi.Validators;
+using UserApi.Application.Validators;
 
 
-namespace UserApi.DTOs
+namespace UserApi.Application.DTOs
 {
     public class CreateUserDto
     {

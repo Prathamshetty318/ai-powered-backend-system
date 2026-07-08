@@ -1,9 +1,7 @@
 using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using UserApi.DTOs;
+using UserApi.Application.DTOs;
 
-namespace UserApi.Validators
+namespace UserApi.Application.Validators
 {
     public class CreateUserDtoValidator : AbstractValidator<CreateUserDto>
     {

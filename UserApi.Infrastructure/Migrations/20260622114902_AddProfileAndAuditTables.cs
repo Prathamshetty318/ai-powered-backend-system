@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace UserApi.Migrations
+namespace UserApi.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class AddProfileAndAuditTables : Migration

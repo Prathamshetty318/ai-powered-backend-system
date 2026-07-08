@@ -1,16 +1,15 @@
-using UserApi.Entities;
-using UserApi.Data;
+using UserApi.Domain.Entities;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using UserApi.Interfaces;
-using UserApi.Repositories;
-using UserApi.DTOs;
+using UserApi.Domain.Interfaces;
+using UserApi.Application.DTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
 using AutoMapper;
-using UserApi.Mapping;
+using UserApi.Application.Mapping;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 
-namespace UserApi.Services
+namespace UserApi.Application.Services
 {
 
     public class UserService
@@ -86,11 +85,12 @@ namespace UserApi.Services
             _logger.LogInformation("Fetching all Users");
 
             var users = await _dapperRepository.GetAllUserAsync();
+            var response = _mapper.Map<IEnumerable<UserResponseDto>>(users);
 
-            _cache.Set("all_users", users, TimeSpan.FromMinutes(5));
+            _cache.Set("all_users", response, TimeSpan.FromMinutes(5));
             _logger.LogInformation("Users returned from database and cached");
 
-            return users;
+            return response;
         }
 
         public async Task RegisterUserAsync (RegisterUserDto dto)  

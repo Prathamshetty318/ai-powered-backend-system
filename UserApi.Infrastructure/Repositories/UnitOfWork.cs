@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using UserApi.Data;
-using UserApi.Interfaces;
-using UserApi.Repositories;
-using UserApi.Entities;
+using UserApi.Infrastructure.Data;
+using UserApi.Domain.Interfaces;
+using UserApi.Infrastructure.Repositories;
+using UserApi.Domain.Entities;
 
-namespace UserApi.Repositories
+namespace UserApi.Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

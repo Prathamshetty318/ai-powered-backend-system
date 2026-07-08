@@ -1,6 +1,4 @@
 using UserApi.Domain.Entities;
-using UserApi.Services;
-
 
 namespace UserApi.Domain.Interfaces
 {

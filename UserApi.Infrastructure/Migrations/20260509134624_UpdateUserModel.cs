@@ -2,7 +2,8 @@
 
 #nullable disable
 
-namespace UserApi.Migrations
+namespace UserApi.Infrastructure.Migrations
+
 {
     /// <inheritdoc />
     public partial class UpdateUserModel : Migration

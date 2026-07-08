@@ -1,23 +1,25 @@
-using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using UserApi.Services;
-using UserApi.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using UserApi.Entities;
-using Microsoft.AspNetCore.Diagnostics;
-using UserApi.Middleware;
-using UserApi.Repositories;
-using UserApi.Interfaces;
-using UserApi.Validators;
-using UserApi.DTOs;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using UserApi.Mapping;
-using UserApi.DapperRepositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System;
+using System.Linq;
+using System.Text;
+using UserApi.Application;
+using UserApi.Application.DTOs;
+using UserApi.Application.Mapping;
+using UserApi.Application.Services;
+using UserApi.Application.Validators;
+using UserApi.Domain.Entities;
+using UserApi.Domain.Interfaces;
+using UserApi.Infrastructure.DapperRepositories;
+using UserApi.Infrastructure.Data;
+using UserApi.Infrastructure.Repositories;
+using UserApi.Middleware;
+using UserApi.Infrastructure;
 
 
 Log.Logger = new LoggerConfiguration()
@@ -49,19 +51,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddScoped<IUserDapperRepository, UserDapperRepository>();
+
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
-builder.Services.AddAutoMapper(typeof(MappingProfile));
-builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped(typeof (IGenericRepository<>),  typeof (GenericRepository<>));  
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddScoped<UserService>();
 builder.Host.UseSerilog();
 builder.Services.AddMemoryCache();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 var app = builder.Build();

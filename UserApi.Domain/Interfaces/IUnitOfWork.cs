@@ -1,7 +1,5 @@
 using System;
-using UserApi.Interfaces;
-using UserApi.Repositories;
-using UserApi.Data;
+using UserApi.Domain.Interfaces;
 using UserApi.Domain.Entities;
 
 namespace UserApi.Domain.Interfaces

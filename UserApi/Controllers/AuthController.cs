@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using UserApi.Services;
-using UserApi.Entities;
-using UserApi.DTOs;
+using UserApi.Application.Services;
+using UserApi.Domain.Entities;
+using UserApi.Application.DTOs;
 
 
 namespace UserApi.Controllers

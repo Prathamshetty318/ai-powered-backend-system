@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using UserApi.DTOs;
+using UserApi.Application.DTOs;
 using AutoMapper;
-using UserApi.Entities;
+using UserApi.Domain.Entities;
 
-namespace UserApi.Mapping
+namespace UserApi.Application.Mapping
 {
     public class MappingProfile : Profile
     {

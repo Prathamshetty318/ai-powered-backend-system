@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using UserApi.Services;
-using UserApi.Entities;
+using UserApi.Application.Services;
+using UserApi.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using UserApi.DTOs;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation;
-using UserApi.Interfaces;
-using UserApi.Validators;
+using UserApi.Domain.Interfaces;
+using UserApi.Application.Validators;
 
 namespace UserApi.Controllers
 {

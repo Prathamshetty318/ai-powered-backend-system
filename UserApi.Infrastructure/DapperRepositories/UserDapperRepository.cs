@@ -1,12 +1,13 @@
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using UserApi.DTOs;
-using UserApi.Interfaces;
+using UserApi.Domain.Interfaces;
 using Microsoft.Data.SqlClient;
+using UserApi.Domain.Entities;
+using Microsoft.Extensions.Configuration;
 
 
-namespace UserApi.DapperRepositories
+namespace UserApi.Infrastructure.DapperRepositories
 {
     public class UserDapperRepository : IUserDapperRepository
     {
@@ -18,7 +19,7 @@ namespace UserApi.DapperRepositories
         }
 
 
-        public async Task<IEnumerable<UserResponseDto>> GetAllUserAsync()
+        public async Task<IEnumerable<User>> GetAllUserAsync()
         {
             var connectionString =
                 _configuration.GetConnectionString(
@@ -27,7 +28,7 @@ namespace UserApi.DapperRepositories
             using var connection =
                 new SqlConnection(connectionString);
 
-            return await connection.QueryAsync<UserResponseDto>(
+            return await connection.QueryAsync<User>(
                 "GetAllUsers",
                 commandType: CommandType.StoredProcedure);
         }
