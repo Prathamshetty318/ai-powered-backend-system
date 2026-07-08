@@ -2,9 +2,9 @@ using System;
 using UserApi.Interfaces;
 using UserApi.Repositories;
 using UserApi.Data;
-using UserApi.Entities;
+using UserApi.Domain.Entities;
 
-namespace UserApi.Interfaces
+namespace UserApi.Domain.Interfaces
 {
     public interface IUnitOfWork
     {

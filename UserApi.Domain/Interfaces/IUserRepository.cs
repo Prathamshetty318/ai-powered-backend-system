@@ -1,8 +1,8 @@
-using UserApi.Entities;
+using UserApi.Domain.Entities;
 using UserApi.Services;
 
 
-namespace UserApi.Interfaces
+namespace UserApi.Domain.Interfaces
 {
     public interface IUserRepository
     {

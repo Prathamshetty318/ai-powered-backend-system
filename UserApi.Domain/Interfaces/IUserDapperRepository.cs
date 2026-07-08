@@ -1,7 +1,7 @@
 using UserApi.DTOs;
 using System.Collections.Generic;
 
-namespace UserApi.Interfaces
+namespace UserApi.Domain.Interfaces
 {
     public interface IUserDapperRepository
     {
