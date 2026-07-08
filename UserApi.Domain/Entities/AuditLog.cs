@@ -1,7 +1,7 @@
 using System;
-using UserApi.Models;
+using UserApi.Domain.Entities;
 
-namespace UserApi.Models
+namespace UserApi.Domain.Entities
 {
 
     public class AuditLog

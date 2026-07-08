@@ -1,4 +1,4 @@
-using UserApi.Models;
+using UserApi.Entities;
 using UserApi.Services;
 using UserApi.Repositories;
 using System.Collections.Generic;

@@ -6,7 +6,7 @@ using UserApi.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using UserApi.Models;
+using UserApi.Entities;
 using Microsoft.AspNetCore.Diagnostics;
 using UserApi.Middleware;
 using UserApi.Repositories;
@@ -15,7 +15,7 @@ using UserApi.Validators;
 using UserApi.DTOs;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using UserApi.Mappings;
+using UserApi.Mapping;
 using UserApi.DapperRepositories;
 using Serilog;
 

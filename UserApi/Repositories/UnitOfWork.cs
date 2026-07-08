@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using UserApi.Data;
 using UserApi.Interfaces;
 using UserApi.Repositories;
-using UserApi.Models;
+using UserApi.Entities;
 
 namespace UserApi.Repositories
 {

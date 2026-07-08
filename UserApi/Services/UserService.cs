@@ -1,4 +1,4 @@
-using UserApi.Models;
+using UserApi.Entities;
 using UserApi.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ using UserApi.Repositories;
 using UserApi.DTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
 using AutoMapper;
-using UserApi.Mappings;
+using UserApi.Mapping;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace UserApi.Services

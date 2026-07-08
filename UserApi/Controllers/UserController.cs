@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using UserApi.Services;
-using UserApi.Models;
+using UserApi.Entities;
 using Microsoft.AspNetCore.Authorization;
 using UserApi.DTOs;
 using System.ComponentModel.DataAnnotations;

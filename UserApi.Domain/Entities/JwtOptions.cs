@@ -1,4 +1,4 @@
-namespace UserApi.Models
+namespace UserApi.Domain.Entities
 {
        public class JwtOptions
     {

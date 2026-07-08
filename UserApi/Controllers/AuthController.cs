@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using UserApi.Services;
-using UserApi.Models;
+using UserApi.Entities;
 using UserApi.DTOs;
 
 

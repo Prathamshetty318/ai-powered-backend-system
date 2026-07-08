@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using UserApi.Models;
+using UserApi.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
