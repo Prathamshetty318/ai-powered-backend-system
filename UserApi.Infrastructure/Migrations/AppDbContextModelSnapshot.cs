@@ -22,7 +22,7 @@ namespace UserApi.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UserApi.Models.AuditLog", b =>
+            modelBuilder.Entity("UserApi.Domain.Entities.AuditLog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace UserApi.Infrastructure.Migrations
                     b.ToTable("AuditLogs");
                 });
 
-            modelBuilder.Entity("UserApi.Models.User", b =>
+            modelBuilder.Entity("UserApi.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,7 +66,7 @@ namespace UserApi.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("UserApi.Models.UserProfile", b =>
+            modelBuilder.Entity("UserApi.Domain.Entities.UserProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,21 +99,20 @@ namespace UserApi.Infrastructure.Migrations
                     b.ToTable("UserProfiles");
                 });
 
-            modelBuilder.Entity("UserApi.Models.UserProfile", b =>
+            modelBuilder.Entity("UserApi.Domain.Entities.UserProfile", b =>
                 {
-                    b.HasOne("UserApi.Models.User", "User")
-                        .WithOne("Profile")
-                        .HasForeignKey("UserApi.Models.UserProfile", "UserId")
+                    b.HasOne("UserApi.Domain.Entities.User", "User")
+                        .WithOne("UserProfile")
+                        .HasForeignKey("UserApi.Domain.Entities.UserProfile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UserApi.Models.User", b =>
+            modelBuilder.Entity("UserApi.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Profile")
-                        .IsRequired();
+                    b.Navigation("UserProfile");
                 });
 #pragma warning restore 612, 618
         }

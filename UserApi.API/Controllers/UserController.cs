@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using UserApi.Application.Services;
 using UserApi.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
-using UserApi.DTOs;
+using UserApi.Application.DTOs;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using UserApi.Domain.Interfaces;

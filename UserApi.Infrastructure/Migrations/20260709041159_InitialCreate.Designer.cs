@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UserApi.Data;
+using UserApi.Infrastructure.Data;
 
 #nullable disable
 
-namespace UserApi.Migrations
+namespace UserApi.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260622114902_AddProfileAndAuditTables")]
-    partial class AddProfileAndAuditTables
+    [Migration("20260709041159_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace UserApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UserApi.Models.AuditLog", b =>
+            modelBuilder.Entity("UserApi.Domain.Entities.AuditLog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,7 +45,7 @@ namespace UserApi.Migrations
                     b.ToTable("AuditLogs");
                 });
 
-            modelBuilder.Entity("UserApi.Models.User", b =>
+            modelBuilder.Entity("UserApi.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,7 +55,7 @@ namespace UserApi.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -63,10 +63,13 @@ namespace UserApi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("UserApi.Models.UserProfile", b =>
+            modelBuilder.Entity("UserApi.Domain.Entities.UserProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,16 +79,22 @@ namespace UserApi.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique();
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -93,21 +102,20 @@ namespace UserApi.Migrations
                     b.ToTable("UserProfiles");
                 });
 
-            modelBuilder.Entity("UserApi.Models.UserProfile", b =>
+            modelBuilder.Entity("UserApi.Domain.Entities.UserProfile", b =>
                 {
-                    b.HasOne("UserApi.Models.User", "User")
-                        .WithOne("Profile")
-                        .HasForeignKey("UserApi.Models.UserProfile", "UserId")
+                    b.HasOne("UserApi.Domain.Entities.User", "User")
+                        .WithOne("UserProfile")
+                        .HasForeignKey("UserApi.Domain.Entities.UserProfile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UserApi.Models.User", b =>
+            modelBuilder.Entity("UserApi.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Profile")
-                        .IsRequired();
+                    b.Navigation("UserProfile");
                 });
 #pragma warning restore 612, 618
         }
