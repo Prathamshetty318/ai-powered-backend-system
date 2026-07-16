@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using UserApi.Application.DTOs;
 using AutoMapper;
 using UserApi.Domain.Entities;
+using UserApi.Application.Features.Users.Commands.RegisterUser;
 
 namespace UserApi.Application.Mapping
 {
@@ -18,6 +19,14 @@ namespace UserApi.Application.Mapping
                 .ForPath(
                 dest => dest.UserProfile.PhoneNumber,
                 opt => opt.MapFrom(src => src.PhoneNumber));
+            CreateMap<RegisterUserCommand, User>()
+                .ForPath(
+                dest => dest.UserProfile.Email,
+                opt => opt.MapFrom(src => src.Email))
+                .ForPath(
+                dest => dest.UserProfile.PhoneNumber,
+                opt => opt.MapFrom(src => src.PhoneNumber));
+
         }
     }
 }
