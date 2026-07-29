@@ -7,6 +7,10 @@ using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using UserApi.Domain.Interfaces;
 using UserApi.Application.Validators;
+using AutoMapper;
+using UserApi.Application.Features.Users.Commands.RegisterUser;
+using MediatR;
+
 
 namespace UserApi.Controllers
 {
@@ -16,24 +20,28 @@ namespace UserApi.Controllers
 	[Route("api/[controller]")]
 	public class UserController : ControllerBase
 	{
+		private readonly IMediator _mediator;
 		private readonly UserService _service;
         private readonly IUserDapperRepository _dapperRepository;
+		private readonly IMapper _mapper;
 
-        public UserController(UserService service, IUserDapperRepository dapperRepository)
-		{
-			_service = service;
-			_dapperRepository = dapperRepository;
+        public UserController(IMediator mediator, IUserDapperRepository dapperRepository, IMapper mapper, UserService service)
+        {
+            _mediator = mediator;
+            _dapperRepository = dapperRepository;
+            _mapper = mapper;
+            _service = service;
         }
 
-		
-		/*[HttpGet]
+
+        /*[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
 			var result = await _service.GetAllAsync();
 			return Ok(result);
 		}*/
 
-		[HttpGet("{id}")]
+        [HttpGet("{id}")]
 		public async Task<IActionResult> GetById(int id)
 		{
 			var user = await _service.GetByIdAsync(id);
@@ -70,8 +78,11 @@ namespace UserApi.Controllers
 				return BadRequest("User with the same name already exists.");
             }
 
-            await _service.RegisterUserAsync (dto);
-			return Ok("User Registered Successfully!!!!");
+			var command = _mapper.Map<RegisterUserCommand>(dto);
+
+			var result = await _mediator.Send(command);
+
+            return Ok("User Registered Successfully!!!!");
         }
 
        

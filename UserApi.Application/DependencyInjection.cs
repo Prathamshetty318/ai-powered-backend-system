@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using UserApi.Application.Mapping;
 using UserApi.Application.Services;
 using UserApi.Application.Validators;
+using MediatR;
+using UserApi.Application.Features.Users.Commands.RegisterUser;
 
 namespace UserApi.Application;
 
@@ -18,6 +20,11 @@ public static class DependencyInjection
         services.AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
 
         services.AddScoped<UserService>();
+
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServiceFromAssembly(typeof(RegisterUserCommand).Assembly);
+        });
 
         return services;
     }
