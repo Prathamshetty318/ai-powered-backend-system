@@ -7,7 +7,7 @@ using UserApi.Domain.Entities;
 using MediatR;
 using UserApi.Domain.Interfaces;
 using AutoMapper;
-
+using UserApi.Application.Features.Users.Commands.RegisterUser;
 
 namespace UserApi.Application.Features.Users.Commands.RegisterUser
 {
