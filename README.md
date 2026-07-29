@@ -33,6 +33,7 @@ Backend Architecture
   Validation
   Dapper
   Stored Procedures
+  Clean Architecture
   
 Production Concepts
   Logging (Serilog)
