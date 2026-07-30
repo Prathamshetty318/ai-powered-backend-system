@@ -26,6 +26,7 @@ namespace UserApi.Application.Mapping
                 .ForPath(
                 dest => dest.UserProfile.PhoneNumber,
                 opt => opt.MapFrom(src => src.PhoneNumber));
+            CreateMap<RegisterUserDto, RegisterUserCommand>();
 
         }
     }

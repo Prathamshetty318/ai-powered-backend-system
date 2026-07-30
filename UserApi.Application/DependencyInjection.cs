@@ -21,10 +21,7 @@ public static class DependencyInjection
 
         services.AddScoped<UserService>();
 
-        services.AddMediatR(cfg =>
-        {
-            cfg.RegisterServiceFromAssembly(typeof(RegisterUserCommand).Assembly);
-        });
+        services.AddMediatR(typeof(RegisterUserCommand).Assembly);
 
         return services;
     }
