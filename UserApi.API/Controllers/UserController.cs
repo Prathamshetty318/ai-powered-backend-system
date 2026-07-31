@@ -10,6 +10,7 @@ using UserApi.Application.Validators;
 using AutoMapper;
 using UserApi.Application.Features.Users.Commands.RegisterUser;
 using MediatR;
+using UserApi.Application.Features.Users.Queries.GetAllUsers;
 
 
 namespace UserApi.Controllers
@@ -52,8 +53,10 @@ namespace UserApi.Controllers
         [HttpGet("dapper-users")]
         public async Task<IActionResult> GetAllUsers()
         {
+
+            Console.WriteLine("Controller Hit");
             var result =
-                await _service.GetUsersDapperAsync();
+                await _mediator.Send(new GetAllUsersQuery());
 
             return Ok(result);
         }

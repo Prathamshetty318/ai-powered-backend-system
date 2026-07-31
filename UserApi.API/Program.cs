@@ -60,12 +60,22 @@ builder.Services.AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Host.UseSerilog();
 builder.Services.AddMemoryCache();
+Console.WriteLine(builder.Configuration["Jwt:Key"]);
+Console.WriteLine(builder.Configuration["Jwt:Issuer"]);
 
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseHttpsRedirection();
+
+app.Use(async (context, next) =>
+{
+    Console.WriteLine(context.Request.Headers.Authorization);
+
+    await next();
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 
