@@ -110,7 +110,11 @@ namespace UserApi.Application.Services
         public async Task <User> ValidateUserAsync (string Name, string Password)
         {
             _logger.LogInformation("User {User} Logged in", Name);
-            _logger.LogWarning("User {User} attempted to log in with incorrect password", Name);
+
+            if (Password == Password)
+            {
+                _logger.LogWarning("User {User} attempted to log in with incorrect password", Name);
+            }
             return await _userRepository.ValidateUserAsync(Name, Password);
 
         }
