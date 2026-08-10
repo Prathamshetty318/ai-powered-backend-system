@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using MediatR;
+using System.Text;
 
 namespace UserApi.Application.Behaviours
 {
@@ -12,11 +12,11 @@ namespace UserApi.Application.Behaviours
     {
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            Console.WriteLine($"Before Handler");
+            Console.WriteLine($"Handling : {typeof(TRequest).Name}");
 
             var Response = await next();
 
-            Console.WriteLine($"After Handler");
+            Console.WriteLine($"Handled : {typeof(TRequest).Name}");
 
             return Response;
         }
