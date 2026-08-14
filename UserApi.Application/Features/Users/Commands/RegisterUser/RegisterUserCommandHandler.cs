@@ -8,6 +8,7 @@ using MediatR;
 using UserApi.Domain.Interfaces;
 using AutoMapper;
 using UserApi.Application.Features.Users.Commands.RegisterUser;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace UserApi.Application.Features.Users.Commands.RegisterUser
 {
@@ -15,11 +16,12 @@ namespace UserApi.Application.Features.Users.Commands.RegisterUser
     { 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
-        public RegisterUserCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IDistributedCache _cache;
+        public RegisterUserCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IDistributedCache cache)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<int> Handle (RegisterUserCommand request, CancellationToken cancellationToken)
@@ -34,6 +36,8 @@ namespace UserApi.Application.Features.Users.Commands.RegisterUser
                 });
 
             await _unitOfWork.SaveChangesAsync();
+
+            await _cache.RemoveAsync("all_users");
 
             return User.Id;
 

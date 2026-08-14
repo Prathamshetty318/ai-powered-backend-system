@@ -6,9 +6,9 @@ using UserApi.Application.DTOs;
 using Microsoft.AspNetCore.Http.HttpResults;
 using AutoMapper;
 using UserApi.Application.Mapping;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
 
 namespace UserApi.Application.Services
 {
@@ -70,42 +70,6 @@ namespace UserApi.Application.Services
 
             return _mapper.Map<UserResponseDto>(user);
 
-        }
-
-        public async Task<IEnumerable<UserResponseDto>> GetUsersDapperAsync()
-        {
-
-            if (_cache.TryGetValue("all_users", out IEnumerable<UserResponseDto> user))
-            {
-                _logger.LogInformation("Users returned from cache");
-
-                return user;
-            }
-
-
-            _logger.LogInformation("Fetching all Users");
-
-            var users = await _dapperRepository.GetAllUserAsync();
-            var response = _mapper.Map<IEnumerable<UserResponseDto>>(users);
-
-            _cache.Set("all_users", response, TimeSpan.FromMinutes(5));
-            _logger.LogInformation("Users returned from database and cached");
-
-            return response;
-        }
-
-        public async Task RegisterUserAsync (RegisterUserDto dto)  
-        {
-            var User = _mapper.Map<User>(dto);
-            await _unitOfWork.Users.AddAsync(User);
-
-            await _unitOfWork.AuditLogs.AddAsync(
-                new AuditLog
-                {
-                    Action = $"User {User.Name} registered",
-                });
-
-            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task <User> ValidateUserAsync (string Name, string Password)

@@ -65,8 +65,6 @@ builder.Services.AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Host.UseSerilog();
 builder.Services.AddMemoryCache();
-Console.WriteLine(builder.Configuration["Jwt:Key"]);
-Console.WriteLine(builder.Configuration["Jwt:Issuer"]);
 
 
 var app = builder.Build();
