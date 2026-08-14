@@ -53,6 +53,11 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = "localhost:6379";
+    options.InstanceName = "UserApi:";
+});
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();

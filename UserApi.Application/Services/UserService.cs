@@ -8,6 +8,7 @@ using AutoMapper;
 using UserApi.Application.Mapping;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace UserApi.Application.Services
 {
@@ -19,13 +20,13 @@ namespace UserApi.Application.Services
         private readonly IMapper _mapper;
         private readonly IUserDapperRepository _dapperRepository;
         private readonly ILogger<UserService> _logger;
-        private readonly IMemoryCache _cache;
+        private readonly IDistributedCache _cache;
 
         public UserService(IUserRepository userRepository, 
             IMapper mapper, 
             IUserDapperRepository dapperRepository, 
             ILogger<UserService> logger,
-            IMemoryCache cache,
+            IDistributedCache cache,
             IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
