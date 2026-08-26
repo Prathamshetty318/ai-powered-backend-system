@@ -5,9 +5,9 @@ WORKDIR /src
 
 COPY . .
 
-RUN dotnet restore "IdentifyHub.API/IdentifyHub.API.csproj"
+RUN dotnet restore "IdentityHub.API/IdentityHub.API.csproj"
 
-RUN dotnet publish "IdentifyHub.API/IdentifyHub.API.csproj" \
+RUN dotnet publish "IdentityHub.API/IdentityHub.API.csproj" \
     -c Release \
     -o /app/publish \
     --no-restore
@@ -22,4 +22,4 @@ COPY --from=build /app/publish .
 
 EXPOSE 8080
 
-ENTRYPOINT ["dotnet", "IdentifyHub.API.dll"]
+ENTRYPOINT ["dotnet", "IdentityHub.API.dll"]

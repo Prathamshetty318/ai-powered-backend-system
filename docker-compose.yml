@@ -1,0 +1,16 @@
+services:
+
+    api:
+        image : identityhub-api:latest
+        container_name: identityhub-api
+        ports:
+        -  "8080:8080"
+        depends_on:
+            - redis
+
+
+    redis :
+        image : redis:latest
+        container_name: identityhub-redis
+        ports:
+        - "6379:6379" 
