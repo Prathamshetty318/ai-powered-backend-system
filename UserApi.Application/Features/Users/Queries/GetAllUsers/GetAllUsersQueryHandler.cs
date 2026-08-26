@@ -47,6 +47,7 @@ namespace UserApi.Application.Features.Users.Queries.GetAllUsers
             var users = await _dapperRepository.GetAllUserAsync();
             var response = _mapper.Map<IEnumerable<UserResponseDto>>(users);
 
+
             var Json = JsonSerializer.Serialize(response);
             await _cache.SetStringAsync(
                 cachekey,
