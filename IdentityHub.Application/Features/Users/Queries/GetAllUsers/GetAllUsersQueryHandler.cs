@@ -34,7 +34,7 @@ namespace IdentityHub.Application.Features.Users.Queries.GetAllUsers
         {
             const string cachekey = "all_users";
 
-            var cachedData = await _cache.GetStringAsync(cachekey);dotnet 
+            var cachedData = await _cache.GetStringAsync(cachekey);
 
             if (cachedData != null)
             {
